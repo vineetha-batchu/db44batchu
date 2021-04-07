@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}, How is your day?
+  button(type="button", class="btn btn-info btn-sm" onclick="update()") Press me
+  div(id="target" class="container text-center m-3 p-4" style="color:teal;font-weight:800;") Display
+  script. 
+      var client_count=0 
+      function update(){
+        client_count++;
+        document.getElementById("target").innerHTML=`Value now ${client_count}`
+        }
+  a(href="/jeeps") go to jeeps
