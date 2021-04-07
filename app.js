@@ -3,12 +3,40 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+  { useNewUrlParser: true, useUnifiedTopology: true });
 
 var indexRouter = require('./routes/index');
 var jeepsRouter = require('./routes/jeeps');
 var starsRouter = require('./routes/stars');
+var resourceRouter=require('./routes/resource');
 var slotRouter = require('./routes/slot');
 var usersRouter = require('./routes/users');
+var Jeep = require("./models/jeep");
+// We can seed the collection if needed on server start
+async function recreateDB() {
+  // Delete everything
+  await Jeep.deleteMany();
+  let instance1 = new Jeep({ jeepname: "JEEP WRANGLER SPORT", enginemodel: "Intercooled Turbo Premium Unleaded I-4 2.0 L/122", price: 44200 });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved")
+  });
+  let instance2 = new Jeep({ jeepname:"JEEP WRANGLER UNLIMITED WILLYS",enginemodel:"Gas/Electric V-6 3.6 L/220 ",price:50530 });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Second object saved")
+  });
+  let instance3 = new Jeep({ jeepname:"JEEP WRANGLER UNLIMITED SAHARA",enginemodel:"as/Electric V-6 3.6 L/220 ",price:55145 });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved")
+  });
+}
+let reseed = true;
+if (reseed) { recreateDB(); }
 
 
 var app = express();
@@ -27,6 +55,7 @@ app.use('/', indexRouter);
 app.use('/jeeps',jeepsRouter);
 app.use('/stars', starsRouter);
 app.use('/slot', slotRouter);
+app.use('/resource',resourceRouter);
 app.use('/users', usersRouter);
 
 
@@ -44,6 +73,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function () {
+  console.log("Connection to DB succeeded")
 });
 
 module.exports = app;
