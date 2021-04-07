@@ -21,7 +21,7 @@ exports.jeep_create_post = async function (req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costumetype":"goat", "cost":12, "size":"large"}
+    // {jeepname:"JEEP WRANGLER SPORT",enginemodel:"Intercooled Turbo Premium Unleaded I-4 2.0 L/122",price:44200}
     document.jeepname = req.body.jeepname;
     document.enginemodel = req.body.enginemodel;
     document.price = req.body.price;

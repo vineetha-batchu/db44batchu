@@ -2,7 +2,8 @@ extends layout
 
 block content
   h1= title
-  - let jeeps=[{jeepname:"JEEP WRANGLER SPORT",enginemodel:"Intercooled Turbo Premium Unleaded I-4 2.0 L/122",price:44200},{jeepname:"JEEP WRANGLER UNLIMITED WILLYS",enginemodel:"Gas/Electric V-6 3.6 L/220 ",price:50530},{jeepname:"JEEP WRANGLER UNLIMITED SAHARA",enginemodel:"as/Electric V-6 3.6 L/220 ",price:55145}]
+  - let jeeps=results
+  //- let jeeps=[{jeepname:"JEEP WRANGLER SPORT",enginemodel:"Intercooled Turbo Premium Unleaded I-4 2.0 L/122",price:44200},{jeepname:"JEEP WRANGLER UNLIMITED WILLYS",enginemodel:"Gas/Electric V-6 3.6 L/220 ",price:50530},{jeepname:"JEEP WRANGLER UNLIMITED SAHARA",enginemodel:"as/Electric V-6 3.6 L/220 ",price:55145}]
   div(class="container-fluid mt-3")
   div(class="row")
     each jeep,index in jeeps
