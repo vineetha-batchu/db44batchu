@@ -11,8 +11,16 @@ exports.jeep_list = async function (req, res) {
     }
 };
 // for a specific Jeep.
-exports.jeep_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: Jeep detail: ' + req.params.id);
+exports.jeep_detail = async function (req, res) {
+    console.log("detail"  + req.params.id)
+    try {
+        result = await Jeep.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+
 };
 // Handle Jeep create on POST.
 exports.jeep_create_post = async function (req, res) {
@@ -38,8 +46,22 @@ exports.jeep_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Jeep delete DELETE ' + req.params.id);
 };
 // Handle Jeep update form on PUT.
-exports.jeep_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: Jeep update PUT' + req.params.id);
+exports.jeep_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Jeep.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.jeepname) toUpdate.jeepname = req.body.jeepname;
+        if(req.body.enginemodel) toUpdate.enginemodel = req.body.enginemodel;
+        if(req.body.price) toUpdate.price = req.body.price;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
+    }
+
 };
 // VIEWS
 // Handle a show all view
