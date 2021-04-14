@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+
+  - let jeepid = toShow._id
+  - let jeepname = toShow.jeepname
+  - let jeepenginemodel = toShow.enginemodel
+  - let jeepprice = toShow.price
+  div
+    div.row
+      div(class='costumeAttr mr-3') Jeep  ID is:
+      div #{jeepid}
+    div.row
+      div(class='costumeAttr mr-3') Jeep Name is:
+      div #{jeepname}
+    div.row
+      div(class='costumeAttr mr-3') Jeep enginemodel is:
+      div #{jeepenginemodel}
+    div.row
+      div(class='costumeAttr mr-3') Jeep price is:
+      div #{jeepprice}

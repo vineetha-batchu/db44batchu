@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  h1= title
+
+  - let jeepid = toShow._id
+  - let jeepname = toShow.jeepname
+  - let jeepenginemodel = toShow.enginemodel
+  - let jeepprice = toShow.price
+  
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{jeepid}
+  - let actionid = "/resource/resource/jeep/" + jeepid
+  form(id='JeepForm', action= actionid, method="PUT")
+    div.form-group
+        label.costumeAttr(for='jeepname')  jeepname
+        input#costumetype(type='text', name='jeepname', value= jeepname )
+    div.form-group
+        label.costumeAttr(for='jeepenginemodel') jeepenginemodel
+        input#size(type='text', name='jeepenginemodel', value= jeepenginemodel )
+    div.form-group
+        label.costumeAttr(for='jeepprice') jeepprice
+        input#cost(type='number', name='jeepprice', value= jeepprice )
+    input(type="submit")
+
+  script.
+    document.forms['JeepForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });
+// Handle a delete one view with id from query
+exports.jeep_delete_Page = async function(req, res) {
+    console.log("Delete view for id "  + req.query.id)
+    try{
+        result = await Jeep .findById(req.query.id)
+        res.render('jeepdelete', { title: 'Jeep Delete', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
