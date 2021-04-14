@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1= title
+  h1(id="JeepTitle")= title
 
   - let jeepid = toShow._id
   - let jeepname = toShow.jeepname
@@ -10,13 +10,13 @@ block content
   div
     div.row
       div(class='costumeAttr mr-3') Jeep  ID is:
-      div #{jeepid}
+      div(class='jeepitem newsty') #{jeepid}
     div.row
       div(class='costumeAttr mr-3') Jeep Name is:
-      div #{jeepname}
+      div(class='jeepitem') #{jeepname}
     div.row
       div(class='costumeAttr mr-3') Jeep enginemodel is:
-      div #{jeepenginemodel}
+      div(class='jeepitem') #{jeepenginemodel}
     div.row
       div(class='costumeAttr mr-3') Jeep price is:
-      div #{jeepprice}
+      div(class='jeepitem') #{jeepprice}

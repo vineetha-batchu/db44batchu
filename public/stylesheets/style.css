@@ -11,3 +11,27 @@ a {
   background-color: aquamarine;
   width: 120px;
 }
+#JeepTitle{
+  color:cyan;
+  font-weight: 800;
+  font-family: Georgia, serif;
+  text-decoration: wavy underline;;
+}
+
+.jeepitem{
+  margin: 3px;
+  padding: 13px;
+  justify-content:center;
+  font-weight: 900;
+  background-color:lightpink;
+  border-radius: 2px;
+}
+.newsty{
+    border-top: 3px solid rgb(0, 183, 255);
+    width: 50%;
+    border-bottom:5px lightskyblue;
+}
+.jeepitem:hover{
+  background-color: rgb(213, 4, 255);
+  color: rgb(36, 33, 33);
+}
