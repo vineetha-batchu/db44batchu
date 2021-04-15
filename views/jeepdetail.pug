@@ -3,20 +3,23 @@ extends layout
 block content
   h1(id="JeepTitle")= title
 
-  - let jeepid = toShow._id
-  - let jeepname = toShow.jeepname
-  - let jeepenginemodel = toShow.enginemodel
-  - let jeepprice = toShow.price
-  div
-    div.row
-      div(class='costumeAttr mr-3') Jeep  ID is:
-      div(class='jeepitem newsty') #{jeepid}
-    div.row
-      div(class='costumeAttr mr-3') Jeep Name is:
-      div(class='jeepitem') #{jeepname}
-    div.row
-      div(class='costumeAttr mr-3') Jeep enginemodel is:
-      div(class='jeepitem') #{jeepenginemodel}
-    div.row
-      div(class='costumeAttr mr-3') Jeep price is:
-      div(class='jeepitem') #{jeepprice}
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let jeepid = toShow._id
+    - let jeepname = toShow.jeepname
+    - let jeepenginemodel = toShow.enginemodel
+    - let jeepprice = toShow.price
+    div
+      div.row
+        div(class='costumeAttr mr-3') Jeep  ID is:
+        div(class='jeepitem newsty') #{jeepid}
+      div.row
+        div(class='costumeAttr mr-3') Jeep Name is:
+        div(class='jeepitem') #{jeepname}
+      div.row
+        div(class='costumeAttr mr-3') Jeep enginemodel is:
+        div(class='jeepitem') #{jeepenginemodel}
+      div.row
+        div(class='costumeAttr mr-3') Jeep price is:
+        div(class='jeepitem') #{jeepprice}

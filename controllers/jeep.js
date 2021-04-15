@@ -4,8 +4,7 @@ exports.jeep_list = async function (req, res) {
     try {
         theJeeps = await Jeep.find();
         res.send(theJeeps);
-    }
-    catch (err) {
+    } catch (err) {
         res.send(`{"error": ${err}}`);
         res.status(500);
     }
@@ -36,12 +35,11 @@ exports.jeep_create_post = async function (req, res) {
     try {
         let result = await document.save();
         res.send(result);
-    }
-    catch (err) {
+    } catch (err) {
         res.send(`{"error": ${err}}`)
         res.status(500);
     }
-};// Handle Jeep delete form on DELETE.
+}; // Handle Jeep delete form on DELETE.
 exports.jeep_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
@@ -78,9 +76,11 @@ exports.jeep_view_all_Page = async function (req, res) {
     try {
         theJeeps = await Jeep.find();
         console.log("njfndw")
-        res.render('jeeps', { title: 'Jeep Search Results', results: theJeeps });
-    }
-    catch (err) {
+        res.render('jeeps', {
+            title: 'Jeep Search Results',
+            results: theJeeps
+        });
+    } catch (err) {
         res.send(`{"error": ${err}}`)
         res.status(500);
     }
@@ -90,10 +90,11 @@ exports.jeep_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
     try {
         result = await Jeep.findById(req.query.id)
-        res.render('jeepdetail',
-            { title: 'jeep Detail', toShow: result });
-    }
-    catch (err) {
+        res.render('jeepdetail', {
+            title: 'jeep Detail',
+            toShow: result
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
@@ -101,43 +102,41 @@ exports.jeep_view_one_Page = async function (req, res) {
 // Handle building the view for creating a costume.
 // No body, no in path parameter, no query.
 // Does not need to be async
-exports.jeep_create_Page =  function(req, res) {
+exports.jeep_create_Page = function (req, res) {
     console.log("create view")
-    try{
-        res.render('jeepcreate', { title: 'Jeep Create'});
-    }
-    catch(err){
+    try {
+        res.render('jeepcreate', {
+            title: 'Jeep Create'
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
 };
 // Handle building the view for updating a costume.
 // query provides the id
-exports.jeep_update_Page =  async function(req, res) {
-    console.log("update view for item "+req.query.id)
-    try{
+exports.jeep_update_Page = async function (req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
         let result = await Jeep.findById(req.query.id)
         res.render('jeepupdate', { title: 'Jeep Update', toShow: result });
-    }
-    catch(err){
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
 };
 
 // Handle a delete one view with id from query
-exports.jeep_delete_Page = async function(req, res) {
-    console.log("Delete view for id "  + req.query.id)
-    try{
+exports.jeep_delete_Page = async function (req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
         result = await Jeep.findById(req.query.id)
-        res.render('jeepdelete', { title: 'Jeep Delete', toShow: result });
-    }
-    catch(err){
+        res.render('jeepdelete', {
+            title: 'Jeep Delete',
+            toShow: result
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
 };
-
-
-
-
