@@ -5,12 +5,13 @@ block content
   - let jeeps=results
   //- let jeeps=[{jeepname:"JEEP WRANGLER SPORT",enginemodel:"Intercooled Turbo Premium Unleaded I-4 2.0 L/122",price:44200},{jeepname:"JEEP WRANGLER UNLIMITED WILLYS",enginemodel:"Gas/Electric V-6 3.6 L/220 ",price:50530},{jeepname:"JEEP WRANGLER UNLIMITED SAHARA",enginemodel:"as/Electric V-6 3.6 L/220 ",price:55145}]
   div(class="container-fluid mt-3")
-  div(class="row")
-    each jeep,index in jeeps
-        div(class="col-sm-2 bg-info m-1 p-3" style=("font-weight:bolder") onclick=`buy(${index})`) #{jeep.jeepname} - #{jeep.enginemodel} - #{jeep.price}
-  script.
-     
-      function buy(itemNo)
+  div(class="row m-1")
+    each jeep in jeeps
+      - let destination = `dispatch(\"/jeeps/update?id=${jeep._id}\")`
+      div(class="col-sm-2 bg-info m-1 p-3" style=("font-weight:bolder") onclick=`buy(${index})`) #{jeep.jeepname} - #{jeep.enginemodel} - #{jeep.price}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+    script.
+      function dispatch(path)
       {
-        alert(`You purchased Item ${itemNo+1}`)
+        window.location.href=path
       }
