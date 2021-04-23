@@ -2,17 +2,17 @@ extends layout
 
 block content
   h1= title
-
-  form(id='JeepForm', action="/resource/resource/jeep", method="POST")
+  div#errors(style:{display:none})
+  form(id='JeepForm' action="/resource/resource/jeep" method="POST")
     div.form-group
-        label.costumeAttr(for='jeepname') Jeep name
-        input#costumetype(type='text', name='jeepname')
+      label.costumeAttr(for='jeepname') Jeep name
+      input#costumetype(type='text' name='jeepname')
     div.form-group
-        label.costumeAttr(for='enginemodel') Jeep enginemodel
-        input#size(type='text', name='enginemodel')
+      label.costumeAttr(for='enginemodel') Jeep enginemodel
+      input#size(type='text' name='enginemodel')
     div.form-group
-        label.costumeAttr(for='jeepprice') Jeep jeepprice
-        input#cost(type='number', name='jeepprice')
+      label.costumeAttr(for='price') Jeep jeepprice
+      input#cost(type='number' name='price')
     input(type="submit")
 
   script.
@@ -25,7 +25,14 @@ block content
       }).then((resp) => {
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("Save succeded")
+        //alert(body.name)
+        if(body.name){
+          document.getElementById("errors").innerHTML=`${body.name}  \n ${body.message}\n`;
+          alert("Save Failed")
+        }
+        else{
+          alert("Save succeded")
+        }
         // TODO handle body
       }).catch((error) => {
         // TODO handle error

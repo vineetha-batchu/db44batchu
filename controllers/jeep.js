@@ -36,7 +36,9 @@ exports.jeep_create_post = async function (req, res) {
         let result = await document.save();
         res.send(result);
     } catch (err) {
-        res.send(`{"error": ${err}}`)
+        console.log(err)
+        //res.send({"name":err.name,"message":err.message})
+        res.send(err)
         res.status(500);
     }
 }; // Handle Jeep delete form on DELETE.
