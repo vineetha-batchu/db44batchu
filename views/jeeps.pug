@@ -14,9 +14,9 @@ block content
       - let destinationdetail = `dispatch(\"/jeeps/detail?id=${jeep._id}\")`
       - let destinationdelete = `dispatchDelete(\"/jeeps/delete?id=${jeep ._id}\")`
       div(class="col-sm-2 bg-info m-1 p-3" style=("font-weight:bolder") onclick=`buy(${index})`) #{jeep.jeepname} - #{jeep.enginemodel} - #{jeep.price}
-        button.btn( class="btn-info ml-1", onclick= destinationdetail) Detail
-        button.btn( class="btn-info ml-1", onclick= destination) Update
-        button.btn( class="btn-info ml-1", onclick= destinationdelete) Delete
+        button.btn( class="btn-danger ml-1", onclick= destinationdetail) Detail
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+        button.btn( class="btn-secondary ml-1", onclick= destinationdelete) Delete
     script.
       function dispatch(path)
       {
